@@ -1,7 +1,6 @@
 # my_activities
 
-A new Flutter project.
-
+A new Flutter project to registration my costs and incomes.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
