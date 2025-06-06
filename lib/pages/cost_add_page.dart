@@ -18,7 +18,20 @@ class _CostAddPageState extends State<CostAddPage> {
   TextEditingController amountController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   String costCatValue = 'خوراک خانه';
-  var items = ['خوراک خانه', 'تنقلات', 'پوشاک', 'شخصی', 'ماشین', 'مسکن', 'درمان', 'تفریح', 'حمل و نقل', 'سایر'];
+  var items = [
+    'خوراک خانه',
+    'مصرفی خانه',
+    'تنقلات',
+    'پوشاک',
+    'شخصی',
+    'ماشین',
+    'مسکن',
+    'درمان',
+    'قبوض',
+    'تفریح',
+    'حمل و نقل',
+    'سایر'
+  ];
   DateTime today = DateTime.now();
   final _costService = CostService();
 
