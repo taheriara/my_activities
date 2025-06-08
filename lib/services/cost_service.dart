@@ -64,17 +64,17 @@ class CostService {
   //   return groceryList[0];
   // }
 
-  // getYears() async {
-  //   var result = await _repository.readDataGroup("tasks", ['year'], "year");
-  //   List<String> years = [];
-  //   for (var element in result) {
-  //     years.add(element['year']);
-  //   }
+  getYears() async {
+    var result = await _repository.readDataGroup("cost", ['year'], "year");
+    List<int> years = [];
+    for (var element in result) {
+      years.add(element['year']);
+    }
 
-  //   // var groceries = await _repository.readDataGroup("dailyEntery", ['year'], "year");
-  //   //List<String> groceryList = groceries.isNotEmpty ? List<String>.from(groceries.map((c) => fromMap(c)).toList()) : [];
-  //   return years;
-  // }
+    // var groceries = await _repository.readDataGroup("dailyEntery", ['year'], "year");
+    //List<String> groceryList = groceries.isNotEmpty ? List<String>.from(groceries.map((c) => fromMap(c)).toList()) : [];
+    return years;
+  }
 
   deleteCost() async {
     return await _repository.deleteAllRecords('cost', '');
