@@ -22,9 +22,9 @@ class CostService {
     return await _repository.readDataAll('cost');
   }
 
-  Future<List<Report>> getReport() async {
-    var groceries = await _repository
-        .report("select category, type, Sum(amount) as amount from cost GROUP BY category, type ORDER BY category;");
+  Future<List<Report>> getReport(int year, int month) async {
+    var groceries = await _repository.report(
+        "select category, type, Sum(amount) as amount from cost WHERE (year=$year and month =$month) GROUP BY category,type  ORDER BY category;");
     List<Report> groceryList =
         groceries.isNotEmpty ? List<Report>.from(groceries.map((c) => Report.fromJson(c)).toList()) : [];
     return groceryList;
@@ -39,6 +39,13 @@ class CostService {
 
   Future<List<Cost>> getAllCostsYearMonth(String month, String year) async {
     var groceries = await _repository.readData("cost", "month=$month and year=$year", "id DESC");
+    List<Cost> groceryList =
+        groceries.isNotEmpty ? List<Cost>.from(groceries.map((c) => Cost.fromJson(c)).toList()) : [];
+    return groceryList;
+  }
+
+  Future<List<Cost>> getAllCostsYearMonthCategory(String month, String year, String cat) async {
+    var groceries = await _repository.readData("cost", "month=$month and year=$year and category='$cat'", "id DESC");
     List<Cost> groceryList =
         groceries.isNotEmpty ? List<Cost>.from(groceries.map((c) => Cost.fromJson(c)).toList()) : [];
     return groceryList;

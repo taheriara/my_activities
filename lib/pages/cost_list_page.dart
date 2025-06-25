@@ -63,7 +63,8 @@ class _CostListPageState extends State<CostListPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ReportPage()),
+                    MaterialPageRoute(
+                        builder: (context) => ReportPage(year: dropdownYearValue, month: dropdownMonthValue)),
                   );
                 },
                 icon: const Icon(
@@ -149,7 +150,7 @@ class _CostListPageState extends State<CostListPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 14,
                 ),
                 Expanded(

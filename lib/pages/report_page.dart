@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_activities/models/report.dart';
+import 'package:my_activities/pages/cost_category_to_details.dart';
 import 'package:my_activities/services/cost_service.dart';
 
 class ReportPage extends StatefulWidget {
-  const ReportPage({super.key});
+  const ReportPage({super.key, required this.year, required this.month});
+  final int year;
+  final int month;
 
   @override
   State<ReportPage> createState() => _ReportPageState();
@@ -26,7 +29,7 @@ class _ReportPageState extends State<ReportPage> {
 
   Future fetchFromDb() async {
     report.clear();
-    report.addAll(await _costService.getReport());
+    report.addAll(await _costService.getReport(widget.year, widget.month));
     setState(() {});
   }
 
@@ -90,6 +93,14 @@ class _ReportPageState extends State<ReportPage> {
                             child: Text('فعلا خبری نیست!'),
                           )
                         : ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CostCategoryToDetails(
+                                        year: widget.year, month: widget.month, category: report[index].category)),
+                              );
+                            },
                             title: Text(report[index].category),
                             // subtitle: Text(report[index].type),
                             trailing: Text(
@@ -103,7 +114,7 @@ class _ReportPageState extends State<ReportPage> {
             !_canShowButton
                 ? const SizedBox.shrink()
                 : TextButton(
-                    child: Text("جمـــع کلــی"),
+                    child: const Text("جمـــع کلــی"),
                     onPressed: () {
                       setState(() {});
                       hideWidget();
